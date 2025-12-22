@@ -23,6 +23,31 @@ class DrawComponent extends JComponent {
         double width = 200;
         double height = 150;
 
+        var rect = new Rectangle2D.Double(leftX, topY, width, height);
+        g2.draw(rect);
+
+        // draw the enclosed ellipse
+
+        var ellipse = new Ellipse2D.Double();
+        ellipse.setFrame(rect);
+
+        // draw a diagonal line
+
+        g2.draw(new Line2D.Double(leftX, topY, leftX + width, topY + height));
+
+        // draw a circle with the same center
+
+        double centerX = rect.getCenterX();
+        double centerY = rect.getCenterY();
+        double radius = 150;
+
+        var circle = new Ellipse2D.Double();
+        circle.setFrameFromCenter(centerX, centerY, centerX + radius, centerY + radius);
+        g2.draw(circle);
+    }
+
+    public Dimension getPreferredSize() {
+        return new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
     }
 
 }
